@@ -144,57 +144,55 @@
 
 							<p>爬了幾個小時，改了又改，修了又修，成果圖片也傳不進這個網址，盡力了
 							<br>from selenium import webdriver
-							    from selenium.webdriver.chrome.service import Service
-					                    from selenium.webdriver.common.by import By
-							    from selenium.webdriver.common.keys import Keys
-						     	    import time
-							    from webdriver_manager.chrome import ChromeDriverManager
-							    from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
-							    # 定義抓取一頁資料的函數
-								def extract_page_data():
-								time.sleep(1)
-    								items = driver.find_elements(By.CLASS_NAME, "oj-flex-item") # Q?
-   								for item in items:
-       									title_element = item.find_element(By.TAG_NAME, "h3") # Q?
-        								title = title_element.text
-       									link = title_element.get_attribute("href")
-      									data_list.append({"標題": title, "連結": link})
-        								print(title, link)
-							    #%%
-							    options = webdriver.ChromeOptions()
-							    options.add_argument("--disable-blink-features=AutomationControlled")
+							<br>from selenium.webdriver.chrome.service import Service
+					                <br>from selenium.webdriver.common.by import By
+							<br>from selenium.webdriver.common.keys import Keys
+						     	<br>import time
+							<br>from webdriver_manager.chrome import ChromeDriverManager
+							<br>from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
+							<br># 定義抓取一頁資料的函數
+								<br>def extract_page_data():
+								<br>time.sleep(1)
+    								<br>items = driver.find_elements(By.CLASS_NAME, "oj-flex-item") # Q?
+   								<br>for item in items:
+       								<br>	title_element = item.find_element(By.TAG_NAME, "h3") # Q?
+        							<br>	title = title_element.text
+       								<br>	link = title_element.get_attribute("href")
+      								<br>	data_list.append({"標題": title, "連結": link})
+        							<br>	print(title, link)
+							<br>#%%
+							<br>options = webdriver.ChromeOptions()
+							<br>options.add_argument("--disable-blink-features=AutomationControlled")
+							<br>driver = webdriver.Chrome
+    							<br>service=webdriver.chromeservice.Service(ChromeDriverManager().install()),
+    							<br>options=options
+							    
+							<br># 啟動瀏覽器
+							<br>drive.get("https://data.chiayi.gov.tw/opendata/")
+						 	<br>driver.maximize_window()
+							<br># 搜尋關鍵字
+							<br>search_box =driver.find_element(By.ID, "oj-inputsearch-input-inputSearch") # Q?
+							<br>search_box.sendkeys("長照")
+							<br>search_box.send_keys(Keys.ENTER)
+							<br>#time.sleep(2)
 
-							    driver = webdriver.Chrome(
-    							    	service=webdriver.chrome.service.Service(ChromeDriverManager().install()),
-    								options=options
-							    )
-							    # 啟動瀏覽器
-							    driver.get("https://data.chiayi.gov.tw/opendata/")
-						 	    driver.maximize_window()
+							<br># 存放所有資料的列表
+							<br>data_list = []
 
-							    # 搜尋關鍵字
-							    search_box = driver.find_element(By.ID, "oj-inputsearch-input-inputSearch") # Q?
-							    search_box.send_keys("長照")
-							    search_box.send_keys(Keys.ENTER)
-							    #time.sleep(2)
+							<br># 迴圈抓多頁
+							<br>count=0
+							<br>while count<1:
+    							<br>time.sleep(2)
+    							<br>extract_page_data()
+   							<br>count +=1
+  							<br>#time.sleep(2)
 
-							    # 存放所有資料的列表
-							    data_list = []
-
-							    # 迴圈抓多頁
-							    count=0
-							    while count<1:
-    							    time.sleep(2)
-    							    extract_page_data()
-   							    count +=1
-  							    #time.sleep(2)
-
-							    driver.quit()
-							    #%%
-		 					    import pandas as pd
-							    # 轉為 DataFrame 並輸出成 CSV
-						 	    df = pd.DataFrame(data_list)
-							    df.to_csv(r"C:\Users\user\Desktop\網路爬蟲期末成果\長照資料", index=False, encoding="utf-8-sig")
+							<br>driver.quit()
+							<br>#%%
+		 					<br>import pandas as pd
+							<br># 轉為 DataFrame 並輸出成 CSV
+						 	<br>df = pd.DataFrame(data_list)
+							<br>df.to_csv(r"C:\Users\user\Desktop\網路爬蟲期末成果\長照資料", index=False, encoding="utf-8-sig")
 </p>
 
 						</div>
